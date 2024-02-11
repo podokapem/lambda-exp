@@ -33,4 +33,4 @@ jobs:
       - name: Deploy to AWS Lambda
         run: |
           # Add your deployment script or AWS CLI commands here
-          # For example: aws lambda update-function-code --function-name TOLI_LAMBDA_FUNCTION --zip-file fileb://function.zip
+          # For example: aws lambda update-function-code --function-name TOLI_LAMBDA_FIRST --zip-file fileb://function.zip

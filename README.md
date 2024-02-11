@@ -1,2 +1,2 @@
 # lambda-exp
-- init update
+- init + update

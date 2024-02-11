@@ -4,9 +4,9 @@ on:
   push:
     branches:
       - main  # Adjust this to match your deployment branch
-    paths:
-    - 'lambda-exp/**'
-    - 'requirements.txt'
+#    paths:
+#    - 'lambda-exp/**'
+#    - 'requirements.txt'
 
 jobs:
   deploy:

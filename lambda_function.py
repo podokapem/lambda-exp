@@ -1,6 +1,7 @@
+import json
+
 def lambda_handler(event, context):
-    print("Hello, World!")
     return {
         'statusCode': 200,
-        'body': 'Hello, World! 1'
+        'body': json.dumps('Hello, World! 123')
     }

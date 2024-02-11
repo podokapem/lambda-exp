@@ -3,37 +3,34 @@ name: Deploy Lambda Function
 on:
   push:
     branches:
-      - main  # Adjust this to match your deployment branch
-#    paths:
-#    - 'lambda-exp/**'
-#    - 'requirements.txt'
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v3 # Updated to the latest version compatible with Node.js 20
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.8'  # Match your Lambda's runtime version
+      - name: Set up Python
+        uses: actions/setup-python@v4 # Updated to the latest version compatible with Node.js 20
+        with:
+          python-version: '3.12' # Specify your required Python version
 
-    - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
-        pip install awscli
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2 # Updated to the latest version compatible with Node.js 20
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1 # Specify your AWS region
 
-    - name: Zip the Lambda function and dependencies
-      run: zip -r function.zip .
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1  # Adjust to your Lambda function's region
-
-    - name: Deploy Lambda function
-      run: aws lambda update-function-code --function-name TOLI_LAMBDA_FIRST --zip-file fileb://function.zip
+      - name: Deploy to AWS Lambda
+        run: |
+          # Add your deployment script or AWS CLI commands here
+          # For example: aws lambda update-function-code --function-name TOLI_LAMBDA_FUNCTION --zip-file fileb://function.zip

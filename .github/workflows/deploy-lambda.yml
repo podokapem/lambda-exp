@@ -30,6 +30,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Zip the Lambda function code
+        run: zip -r function.zip .
+        
       - name: Deploy to AWS Lambda
         run: |
           aws lambda update-function-code --function-name TOLI_LAMBDA_FIRST --zip-file fileb://function.zip

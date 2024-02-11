@@ -2,3 +2,4 @@
 - init + update
 
 .github/workflows/deploy-lambda.yml
+removed path
